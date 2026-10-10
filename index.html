@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mistik V6 - Luxury Edition</title>
+<meta name="theme-color" content="#d4af37">
+<meta name="description" content="Aplikasi prediksi mistik dengan rumusan Taysen, CT, AI, dan tabel lengkap">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mistik">
+  <style>
+:root {
+  --bg-dark: #0a0514;
+  --bg-card: rgba(18, 9, 34, 0.75);
+  --border-gold: rgba(212, 175, 55, 0.4);
+  --gold: #d4af37;
+  --gold-light: #f9e9b8;
+  --violet: #a78bfa;
+  --emerald: #34d399;
+  --text: #f0eaff;
+  --text-muted: #9b8fb9;
+  --shadow-lg: 0 20px 40px rgba(0,0,0,0.8);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: 
+    radial-gradient(ellipse at 20% 0%, rgba(109,40,217,0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(212,175,55,0.1) 0%, transparent 50%),
+    linear-gradient(180deg, #030107 0%, #0a0514 100%);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+header {
+  background: rgba(10, 5, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-gold);
+  padding: 14px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+h1 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Times New Roman', serif;
+}
+.pasaranBox {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: rgba(18, 9, 34, 0.7);
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 6px 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+select, input, textarea {
+  background: rgba(10, 5, 20, 0.9);
+  color: var(--gold-light);
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.25s;
+}
+select { font-family: 'Segoe UI', sans-serif; }
+select:focus, input:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.15), 0 0 20px rgba(212,175,55,0.1);
+}
+.btn {
+  background: linear-gradient(135deg, #b8860b, #d4af37, #f9e9b8);
+  border: none;
+  color: #1a0f00;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,175,55,0.5); }
+.btn:active { transform: scale(0.97); }
+.btn2 {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(212,175,55,0.3);
+  color: var(--gold-light);
+  padding: 9px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-size: 12px;
+}
+.btn2:hover { background: rgba(212,175,55,0.15); border-color: var(--gold); }
+.btn-danger {
+  background: rgba(220, 38, 38, 0.15);
+  border-color: rgba(220, 38, 38, 0.4);
+  color: #fca5a5;
+}
+.btn-danger:hover { background: rgba(220, 38, 38, 0.3); color: #fff; }
+.btn-ok {
+  background: linear-gradient(135deg, #059669, #34d399);
+  color: #002200;
+  border: none;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0;
+  overflow: auto;
+  padding-bottom: 4px;
+}
+.tabBtn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(212,175,55,0.2);
+  background: rgba(18, 9, 34, 0.6);
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s;
+  font-weight: 600;
+  font-size: 13px;
+  backdrop-filter: blur(6px);
+}
+.tabBtn:hover { color: var(--gold-light); border-color: var(--border-gold); }
+.tabBtn.active {
+  background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(167,139,250,0.2));
+  color: var(--gold-light);
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(212,175,55,0.2);
+}
+.card {
+  background: rgba(18, 9, 34, 0.65);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
+.hero {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(30, 15, 60, 0.8), rgba(18, 9, 34, 0.9));
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 0 40px rgba(212,175,55,0.05), 0 0 30px rgba(0,0,0,0.6);
+  position: relative;
+}
+.big {
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(212,175,55,0.5));
+  font-family: 'Courier New', monospace;
+  line-height: 1.2;
+}
+.small {
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+.log {
+  white-space: pre-wrap;
+  background: rgba(5, 2, 10, 0.8);
+  border: 1px dashed rgba(212,175,55,0.3);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  font-size: 12px;
+  max-height: 280px;
+  overflow: auto;
+  font-family: 'Courier New', monospace;
+  color: #a78bfa;
+  line-height: 1.6;
+}
+.tblGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+.tblItem {
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  background: rgba(10, 5, 20, 0.6);
+  backdrop-filter: blur(6px);
+  transition: all 0.2s;
+}
+.tblItem:hover { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.1); }
+.tblItem input { width: 100%; margin-top: 6px; }
+.flex { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+#notif {
+  position: fixed;
+  top: 20px; right: 20px;
+  background: linear-gradient(135deg, var(--gold), var(--violet));
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: none;
+  z-index: 99;
+  font-weight: 800;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  letter-spacing: 0.5px;
+}
+.kv {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(212,175,55,0.15);
+  padding: 6px 0;
+}
+.hl {
+  color: var(--gold-light);
+  font-weight: 800;
+}
+.posBox {
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  background: rgba(10, 5, 20, 0.6);
+}
+.posBox h4 { margin: 0 0 8px; color: var(--gold-light); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+/* CT AI boxes */
+.ct-ai-boxes {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.ct-ai-box {
+  flex: 1;
+  min-width: 140px;
+  max-width: 220px;
+  background: rgba(10, 5, 20, 0.7);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+.ct-ai-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.ct-ai-box:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 25px rgba(212,175,55,0.3);
+}
+.ct-ai-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.ct-ai-value {
+  display: block;
+  font-size: 22px;
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(212,175,55,0.5);
+}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-gold); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+</style>
+</head>
+  <script>
+/* ===== PWA Service Worker Registration ===== */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(err => {
+      console.log('SW registration failed:', err);
+    });
+  });
+}
+
+/* ===== Auto-save data result & formula saat berubah ===== */
+window.addEventListener('beforeunload', () => {
+  if(typeof saveLS === 'function'){
+    try{
+      saveLS('dataResult_v6', document.getElementById('dataResult').value);
+      saveLS('last_formula_v6', document.getElementById('formula').value);
+    }catch(e){}
+  }
+});
+  </script>
+<body>
+<div id="notif"></div>
+<header>
+<h1>🔮 MISTIK V6 LUXURY</h1>
+<div class="pasaranBox">
+<label class="small">Pasaran:</label>
+<select id="pasaranSelect"></select>
+<input id="pasaranInput" placeholder="Baru..." style="width:110px">
+<button class="btn2" onclick="addPasaran()">+ Tambah</button>
+<button class="btn2 btn-danger" onclick="delPasaran()">Hapus</button>
+</div>
+<div class="flex">
+<button class="btn2" onclick="resetDataResult()">♻️ Reset Data</button>
+<button class="btn2 btn-danger" onclick="resetAllTotal()">🗑️ Reset Total</button>
+<button class="btn2 btn-ok" onclick="copyHasil()">📋 Salin</button>
+</div>
+</header>
+
+<div class="container">
+<div class="tabs">
+<button class="tabBtn active" id="btn-prediksi" onclick="openTab('prediksi')">📈 Prediksi</button>
+<button class="tabBtn" id="btn-tabeldata" onclick="openTab('tabeldata')">📊 Tabel Data</button>
+<button class="tabBtn" id="btn-mistik" onclick="openTab('mistik')">🌀 Mistik</button>
+<button class="tabBtn" id="btn-catatan" onclick="openTab('catatan')">📝 Catatan</button>
+</div>
+
+<div id="tab-prediksi">
+<div class="grid2">
+<div class="card">
+<label>Data Result 4D (baru di bawah = E1):</label>
+<textarea id="dataResult" rows="14"></textarea>
+<div class="flex" style="margin-top:6px">
+<button class="btn2" onclick="resetDataResult()">Reset Data Result</button>
+<button class="btn2" onclick="kosongkan()">Kosongkan</button>
+<span class="small" id="infoData"></span>
+</div>
+</div>
+
+<div class="card">
+<div class="flex" style="justify-content:space-between;align-items:center">
+<label><b>Rumusan</b></label>
+<label class="small"><input type="checkbox" id="multiMode" onchange="toggleMulti()"> Multi Posisi AS/COP/KEP/EKOR</label>
+</div>
+
+<div id="singleBox">
+<input id="formula" placeholder="A8ml+C2+E1mb atau A4+K1+E1=Tu" style="font-size:16px;margin-top:8px">
+<div class="flex" style="margin-top:6px">
+<button class="btn" onclick="hitung()">Hitung</button>
+<button class="btn2" onclick="setFormula('A8ml+C2+E1mb')">A8ml+C2+E1mb</button>
+<button class="btn2" onclick="setFormula('A4+K1+E1=Tu')">A4+K1+E1=Tu</button>
+</div>
+</div>
+
+<div id="multiBox" style="display:none;margin-top:10px">
+<div class="grid2">
+<div class="posBox"><h4>🎯 AS</h4><input id="formulaAS" placeholder="Rumus AS, mis: A5+E1ml"></div>
+<div class="posBox"><h4>🎯 COP</h4><input id="formulaCOP" placeholder="Rumus COP"></div>
+<div class="posBox"><h4>🎯 KEPALA</h4><input id="formulaKEP" placeholder="Rumus KEP"></div>
+<div class="posBox"><h4>🎯 EKOR</h4><input id="formulaEKOR" placeholder="Rumus EKOR"></div>
+</div>
+<div class="flex" style="margin-top:8px"><button class="btn" onclick="hitung()">Hitung Multi</button></div>
+</div>
+
+<div class="hero" style="margin-top:12px">
+<div class="small">HASIL AKHIR - Bulat 20→2 (jumlah digit sampai 1 digit)</div>
+<div id="hasil" class="big">-</div>
+<div id="hasilSub" class="small"></div>
+</div>
+
+<!-- CT & AI BOXES -->
+<div class="ct-ai-boxes">
+  <div class="ct-ai-box" id="ctBox" onclick="copyCT()">
+    <span class="ct-ai-label">CT</span>
+    <span class="ct-ai-value" id="ctValue">-</span>
+  </div>
+  <div class="ct-ai-box" id="aiBox" onclick="copyAI()">
+    <span class="ct-ai-label">AI</span>
+    <span class="ct-ai-value" id="aiValue">-</span>
+  </div>
+</div>
+
+<div id="tabelResult"></div>
+<div class="log" id="log" style="margin-top:8px"></div>
+</div>
+</div>
+</div>
+
+<div id="tab-tabeldata" style="display:none">
+<div class="card">
+<h3 style="margin:0">Edit Tabel AS/COP/KEP/EKOR/CT/AI</h3>
+<div class="flex" style="margin-top:8px"><button class="btn2" onclick="saveTabelData()">💾 Simpan</button><button class="btn2" onclick="resetTabelData()">↩️ Reset Default</button></div>
+</div>
+<div id="tabelDataEditor" class="tblGrid"></div>
+</div>
+
+<div id="tab-mistik" style="display:none">
+<div class="card">
+<h3 style="margin:0">Edit Tabel Mistik (10 digit)</h3>
+<div class="flex" style="margin-top:8px"><button class="btn2" onclick="saveMistik()">💾 Simpan</button><button class="btn2" onclick="resetMistik()">↩️ Reset</button></div>
+</div>
+<div id="mistikEditor" class="tblGrid"></div>
+</div>
+
+<div id="tab-catatan" style="display:none">
+<div class="card">
+<h3>📝 Catatan Rumusan</h3>
+<input id="catatNama" placeholder="Nama rumus" style="width:100%;margin-top:6px">
+<div class="flex" style="margin-top:6px"><button class="btn" onclick="simpanCatatan()">+ Simpan</button></div>
+<div id="catatanList" style="margin-top:10px"></div>
+</div>
+</div>
+
+</div>
+
+<script>
+const DEFAULT_TABEL = {
+AS:{0:'045687912',1:'156798023',2:'267809134',3:'378910245',4:'489021356',5:'590132467',6:'601243578',7:'712354689',8:'823465790',9:'934576801'},
+COP:{0:'012345679',1:'123456780',2:'234567891',3:'345678902',4:'456789013',5:'567890124',6:'678901235',7:'789012346',8:'890123457',9:'901234568'},
+KEP:{0:'123456789',1:'234567890',2:'345678901',3:'456789012',4:'567890123',5:'678901234',6:'789012345',7:'890123456',8:'901234567',9:'012345678'},
+EKOR:{0:'012345678',1:'123456789',2:'234567890',3:'345678901',4:'456789012',5:'567890123',6:'678901234',7:'789012345',8:'890123456',9:'901234567'},
+CT:{0:'0135789',1:'1246890',2:'2357901',3:'3468012',4:'4579123',5:'5680234',6:'6791345',7:'7802456',8:'8913567',9:'9024678'},
+AI:{0:'0357',1:'1468',2:'2579',3:'3680',4:'4791',5:'5802',6:'6913',7:'7024',8:'8135',9:'9246'},
+};
+const DEFAULT_MISTIK = {
+ix:'5678901234', ml:'1058279436', mb:'8769542103', tysen:'7496183052',
+m0:'6587910324', m1:'1098765432', m2:'2809765413', m3:'3210987654', m4:'6532741988',
+m5:'5432109876', m6:'6845230917', m7:'7654321098', m8:'8765392104', m9:'9876543210',
+m10:'4218065937', m11:'1054328967', m12:'2708694135', m13:'3970684251', m14:'6547123098',
+m15:'5649021873', m16:'3870965214', m17:'9486173520', m18:'8974365201', m19:'7832965014',
+};
+function loadLS(k,d){try{let v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}}
+function saveLS(k,v){localStorage.setItem(k,JSON.stringify(v))}
+let TABEL=loadLS('tabel_data_v6', DEFAULT_TABEL);
+let MISTIK_STR=loadLS('mistik_str_v6', DEFAULT_MISTIK);
+let MISTIK_MAP={};
+function rebuild(){MISTIK_MAP={};for(let k in MISTIK_STR){let s=MISTIK_STR[k]; let m={}; for(let i=0;i<10;i++) m[i]=parseInt(s[i]||'0'); MISTIK_MAP[k]=m;} MISTIK_MAP['tu']=MISTIK_MAP['tysen']; MISTIK_MAP['ty']=MISTIK_MAP['tysen'];}
+rebuild();
+function getMistik(d,k){if(!k) return d; k=k.toLowerCase(); let m=MISTIK_MAP[k]; if(!m) return d; return m[parseInt(d)]??d;}
+
+let pasaranList=loadLS('pasaran_v6',['HK','SGP','SYD']); let curPas=loadLS('pasaran_cur_v6','HK');
+function renderPas(){let sel=document.getElementById('pasaranSelect'); sel.innerHTML=''; pasaranList.forEach(p=>{let o=document.createElement('option'); o.value=p; o.textContent=p; if(p===curPas) o.selected=true; sel.appendChild(o);}); sel.onchange=()=>{curPas=sel.value; saveLS('pasaran_cur_v6',curPas);};}
+renderPas();
+function addPasaran(){let v=document.getElementById('pasaranInput').value.trim().toUpperCase(); if(!v) return alert('Isi nama'); if(pasaranList.includes(v)) return alert('Sudah ada'); pasaranList.push(v); curPas=v; saveLS('pasaran_v6',pasaranList); saveLS('pasaran_cur_v6',curPas); document.getElementById('pasaranInput').value=''; renderPas(); showNotif('Pasaran '+v);}
+function delPasaran(){if(pasaranList.length<=1) return alert('Minimal 1'); if(!confirm('Hapus '+curPas+'?')) return; pasaranList=pasaranList.filter(p=>p!==curPas); curPas=pasaranList[0]; saveLS('pasaran_v6',pasaranList); saveLS('pasaran_cur_v6',curPas); renderPas();}
+
+let defaultResult="1204\n9437\n9633\n2161\n1590\n0070\n6919\n7063\n0938\n3654\n8626\n2036\n1109\n0955\n7868\n0962\n8398\n3806\n1772\n9520\n2335\n3314\n8444\n0799\n6907\n8933\n7172\n3039";
+let savedData=loadLS('dataResult_v6',defaultResult);
+document.getElementById('dataResult').value=savedData;
+document.getElementById('dataResult').addEventListener('input',function(e){saveLS('dataResult_v6',e.target.value);});
+
+function openTab(n){
+ document.querySelectorAll('[id^="tab-"]').forEach(function(el){el.style.display='none';});
+ document.getElementById('tab-'+n).style.display='block';
+ document.querySelectorAll('.tabBtn').forEach(function(b){b.classList.remove('active');});
+ document.getElementById('btn-'+n).classList.add('active');
+ if(n==='tabeldata') renderTabelEditor();
+ if(n==='mistik') renderMistikEditor();
+ if(n==='catatan') renderCatatan();
+}
+function toggleMulti(){
+ let c=document.getElementById('multiMode').checked;
+ document.getElementById('singleBox').style.display=c?'none':'block';
+ document.getElementById('multiBox').style.display=c?'block':'none';
+ saveLS('multiMode_v6',c);
+}
+let mm=loadLS('multiMode_v6',false); document.getElementById('multiMode').checked=mm; toggleMulti();
+
+function renderTabelEditor(){
+ let cont=document.getElementById('tabelDataEditor'); cont.innerHTML='';
+ for(let jenis of ['AS','COP','KEP','EKOR','CT','AI']){
+   let div=document.createElement('div'); div.className='tblItem';
+   let h='<b>'+jenis+'</b>';
+   for(let i=0;i<=9;i++){
+     let v=TABEL[jenis][i]||'';
+     h+='<div class="kv"><span>'+jenis+' '+i+'</span><span><input id="ed-'+jenis+'-'+i+'" value="'+v+'" oninput="editTabel(\''+jenis+'\','+i+',this.value)"></span></div>';
+   }
+   div.innerHTML=h; cont.appendChild(div);
+ }
+}
+function editTabel(j,i,v){TABEL[j][i]=v.replace(/[^0-9]/g,'');}
+function saveTabelData(){saveLS('tabel_data_v6',TABEL); showNotif('Tabel disimpan');}
+function resetTabelData(){if(!confirm('Reset tabel ke default?')) return; TABEL=JSON.parse(JSON.stringify(DEFAULT_TABEL)); saveLS('tabel_data_v6',TABEL); renderTabelEditor(); showNotif('Tabel direset'); hitung();}
+
+function renderMistikEditor(){
+ let cont=document.getElementById('mistikEditor'); cont.innerHTML='';
+ Object.keys(DEFAULT_MISTIK).sort().forEach(function(k){
+   let v=MISTIK_STR[k]||'';
+   let div=document.createElement('div'); div.className='tblItem';
+   div.innerHTML='<b>'+k.toUpperCase()+'</b><input id="edm-'+k+'" value="'+v+'" maxlength="10" oninput="editM(\''+k+'\',this.value)"><div class="small">'+[...v].map(function(d,i){return i+'→'+d;}).join(' ')+'</div>';
+   cont.appendChild(div);
+ });
+}
+function editM(k,v){MISTIK_STR[k]=v.replace(/[^0-9]/g,'').slice(0,10);}
+function saveMistik(){
+ for(let k in MISTIK_STR){ if(MISTIK_STR[k].length!==10){ alert(k+' harus 10 digit'); return; } }
+ saveLS('mistik_str_v6',MISTIK_STR); rebuild(); showNotif('Mistik disimpan'); renderMistikEditor();
+}
+function resetMistik(){if(!confirm('Reset mistik?')) return; MISTIK_STR=JSON.parse(JSON.stringify(DEFAULT_MISTIK)); saveLS('mistik_str_v6',MISTIK_STR); rebuild(); renderMistikEditor(); showNotif('Mistik direset'); hitung();}
+
+let catatan=loadLS('catatan_v6',[]);
+function renderCatatan(){
+ let c=document.getElementById('catatanList');
+ if(catatan.length===0){c.innerHTML='<div class="small">Belum ada</div>'; return;}
+ c.innerHTML=catatan.map(function(x,i){
+   return '<div class="card" style="padding:10px"><div class="flex" style="justify-content:space-between"><b>'+x.nama+'</b><span class="badge">'+x.pasaran+'</span></div><div class="small" style="font-family:monospace;margin:6px 0">'+x.rumus+'</div><div class="flex"><button class="btn2" onclick="loadCat('+i+')">Load</button><button class="btn2 btn-danger" onclick="delCat('+i+')">Hapus</button></div></div>';
+ }).join('');
+}
+function simpanCatatan(){
+ let nama=document.getElementById('catatNama').value.trim()||('Rumus '+(catatan.length+1));
+ let rumus=document.getElementById('formula').value.trim();
+ let multi=document.getElementById('multiMode').checked;
+ if(multi){
+   rumus='AS:'+document.getElementById('formulaAS').value+' | COP:'+document.getElementById('formulaCOP').value+' | KEP:'+document.getElementById('formulaKEP').value+' | EKOR:'+document.getElementById('formulaEKOR').value+' | MAIN:'+rumus;
+ }
+ if(!rumus) return alert('Rumus kosong');
+ catatan.push({nama:nama,rumus:rumus,pasaran:curPas});
+ saveLS('catatan_v6',catatan); renderCatatan(); showNotif('Disimpan');
+}
+function loadCat(i){
+ let r=catatan[i].rumus;
+ document.getElementById('formula').value=r;
+ openTab('prediksi');
+ hitung();
+}
+function delCat(i){if(!confirm('Hapus?')) return; catatan.splice(i,1); saveLS('catatan_v6',catatan); renderCatatan();}
+
+function parseData(){
+ let lines=document.getElementById('dataResult').value.trim().split('\n').map(function(s){return s.trim();}).filter(Boolean);
+ let data=lines.map(function(l){return l.replace(/\D/g,'').slice(-4);}).filter(function(l){return l.length==4;});
+ data.reverse();
+ return data;
+}
+function resolveToken(tok,data,logs){
+ let m=tok.match(/^([ACKE]?)(\d+)([a-z0-9]+)?$/i);
+ if(!m) throw 'Token '+tok;
+ let pos=m[1].toUpperCase(); let idx=parseInt(m[2]); let suf=m[3]?m[3].toLowerCase():null; let base;
+ if(pos){
+   if(idx<1||idx>data.length) throw 'Data '+pos+idx+' tidak ada (data cuma '+data.length+')';
+   let row=data[idx-1]; let mp={A:0,C:1,K:2,E:3}; base=parseInt(row[mp[pos]]);
+   logs.push(pos+idx+'='+row+'->'+pos+'='+base);
+ } else {
+   base=idx%10; logs.push('Angka '+idx);
+ }
+ if(suf){let b=base; base=getMistik(base,suf); logs.push(' -> '+b+' '+suf.toUpperCase()+'='+base);}
+ return base;
+}
+function evalFormula(formulaStr, data, logs){
+ let finalConvert=null;
+ let fm=formulaStr.match(/=(ml|mb|ix|tysen|tu|ty|m\d+)$/i);
+ if(fm){finalConvert=fm[1].toLowerCase(); formulaStr=formulaStr.slice(0,fm.index);}
+ let expr=formulaStr;
+ let re=/[ACKE]?\d+(?:ml|mb|ix|tysen|tu|ty|m\d+)?/gi;
+ let toks=[...new Set(formulaStr.match(re)||[])]; toks.sort(function(a,b){return b.length-a.length;});
+ let res={};
+ for(let t of toks){ res[t]=resolveToken(t,data,logs); }
+ for(let t of toks){ expr=expr.split(t).join(res[t]); }
+ if(!/^[0-9+\-*/()%\s]+$/.test(expr)) throw 'Ilegal '+expr;
+ let result=Function('"use strict";return ('+expr+')')();
+ function bulat(n){
+   n=Math.abs(Math.floor(n)); if(n<10) return n;
+   let s=n.toString().split('').reduce(function(a,b){return a+parseInt(b);},0);
+   logs.push(' Bulat '+n+'->'+n.toString().split('').join('+')+'='+s);
+   while(s>=10){
+     let ns=s.toString().split('').reduce(function(a,b){return a+parseInt(b);},0);
+     logs.push(' Bulat lagi '+s+'->'+s.toString().split('').join('+')+'='+ns); s=ns;
+   }
+   return s;
+ }
+ let bul=bulat(result); let finalR=bul;
+ if(finalConvert){ finalR=getMistik(bul,finalConvert); logs.push(' Akhir='+finalConvert.toUpperCase()+': '+bul+'->'+finalR); }
+ return {expr:expr, result:result, bul:bul, finalR:finalR, res:res, finalConvert:finalConvert, raw:formulaStr};
+}
+function setFormula(f){document.getElementById('formula').value=f; saveLS('last_formula_v6',f); hitung();}
+
+function hitung(){
+ try{
+  let data=parseData(); if(data.length===0){ alert('Data kosong'); return; }
+  document.getElementById('infoData').innerText=data.length+' data, E1='+data[0];
+  let multi=document.getElementById('multiMode').checked;
+  let logs=[]; logs.push('Pasaran: '+curPas+' | Data '+data.length+', E1='+data[0]);
+  let hasilUtama=null; let perPos={};
+  if(!multi){
+   let raw=document.getElementById('formula').value.trim(); if(!raw){ alert('Isi rumus'); return; }
+   let ev=evalFormula(raw.replace(/\s+/g,''), data, logs);
+   hasilUtama=ev;
+   logs.push('\nRumus: '+raw+' => '+ev.expr+' = '+ev.result+' -> bulat '+ev.bul+' -> '+ev.finalR);
+  } else {
+   let formulas={AS:document.getElementById('formulaAS').value.trim(), COP:document.getElementById('formulaCOP').value.trim(), KEP:document.getElementById('formulaKEP').value.trim(), EKOR:document.getElementById('formulaEKOR').value.trim(), MAIN:document.getElementById('formula').value.trim()};
+   for(let pos of ['AS','COP','KEP','EKOR']){
+     let f=formulas[pos]||formulas.MAIN; if(!f) continue;
+     let ev=evalFormula(f.replace(/\s+/g,''), data, logs);
+     perPos[pos]=ev;
+     logs.push('\n['+pos+'] '+f+' => '+ev.expr+'='+ev.result+' -> bulat '+ev.bul+' -> '+ev.finalR);
+   }
+   if(Object.keys(perPos).length===0){ alert('Isi minimal 1 rumus di multi mode'); return; }
+   hasilUtama=perPos[Object.keys(perPos)[0]];
+  }
+
+  let displayHasil = multi? Object.values(perPos)[0].finalR : hasilUtama.finalR;
+  if(!multi){
+   document.getElementById('hasil').innerText=displayHasil;
+   document.getElementById('hasilSub').innerText=hasilUtama.raw+' = '+hasilUtama.expr+' = '+hasilUtama.result+' → bulat '+hasilUtama.bul+(hasilUtama.finalConvert?' → '+hasilUtama.finalConvert.toUpperCase()+' '+hasilUtama.finalR:'')+' | '+curPas;
+   let r=displayHasil;
+   document.getElementById('tabelResult').innerHTML='<div class="tblGrid" style="grid-template-columns:1fr 1fr"><div class="tblItem"><b>AS '+r+'</b><div style="font-size:20px" class="hl">'+(TABEL.AS[r]||'-')+'</div></div><div class="tblItem"><b>COP '+r+'</b><div style="font-size:20px" class="hl">'+(TABEL.COP[r]||'-')+'</div></div><div class="tblItem"><b>KEP '+r+'</b><div style="font-size:20px" class="hl">'+(TABEL.KEP[r]||'-')+'</div></div><div class="tblItem"><b>EKOR '+r+'</b><div style="font-size:20px" class="hl">'+(TABEL.EKOR[r]||'-')+'</div></div><div class="tblItem"><b>CT '+r+'</b><div style="font-size:20px" class="hl">'+(TABEL.CT[r]||'-')+'</div></div><div class="tblItem"><b>AI '+r+'</b><div style="font-size:20px" class="hl">'+(TABEL.AI[r]||'-')+'</div></div></div>';
+  } else {
+   let bigTxt = Object.entries(perPos).map(function(entry){return entry[0]+':'+entry[1].finalR;}).join(' | ');
+   document.getElementById('hasil').innerText=bigTxt;
+   document.getElementById('hasilSub').innerText='Mode Multi Posisi | '+curPas;
+   let html='<div class="tblGrid">';
+   for(let pos of ['AS','COP','KEP','EKOR']){
+     let ev=perPos[pos]; if(!ev) continue;
+     let r=ev.finalR;
+     html+='<div class="posBox"><h4>'+pos+' = '+r+' <span class="small">('+ev.raw+'→'+ev.expr+'='+ev.result+'→'+ev.bul+')</span></h4><div>AS:'+(TABEL.AS[r]||'-')+' | COP:'+(TABEL.COP[r]||'-')+' | KEP:'+(TABEL.KEP[r]||'-')+' | EKOR:'+(TABEL.EKOR[r]||'-')+'<br>CT:'+(TABEL.CT[r]||'-')+' | AI:'+(TABEL.AI[r]||'-')+'</div></div>';
+   }
+   html+='</div>';
+   document.getElementById('tabelResult').innerHTML=html;
+  }
+
+  // SET LAST RESULT DIGIT FOR CT/AI BOXES
+  if (!multi) {
+    window.LAST_RESULT_DIGIT = displayHasil;
+  } else {
+    let firstPos = Object.keys(perPos)[0];
+    window.LAST_RESULT_DIGIT = perPos[firstPos] ? perPos[firstPos].finalR : null;
+  }
+  updateCTAI();
+
+  document.getElementById('log').innerText=logs.join('\n');
+  saveLS('last_formula_v6', document.getElementById('formula').value);
+  saveLS('last_formulas_multi_v6', {AS:document.getElementById('formulaAS').value, COP:document.getElementById('formulaCOP').value, KEP:document.getElementById('formulaKEP').value, EKOR:document.getElementById('formulaEKOR').value});
+  showNotif('Hasil '+displayHasil);
+ }catch(e){
+  document.getElementById('log').innerText='ERROR: '+e;
+  console.error(e);
+  alert('Error: '+e);
+ }
+}
+
+// ---- CT & AI BOXES FUNCTIONS ----
+function updateCTAI() {
+  let digit = window.LAST_RESULT_DIGIT;
+  let ctVal = '-', aiVal = '-';
+  if (digit !== null && digit !== undefined && !isNaN(digit)) {
+    ctVal = TABEL.CT[digit] || '-';
+    aiVal = TABEL.AI[digit] || '-';
+  }
+  document.getElementById('ctValue').textContent = ctVal;
+  document.getElementById('aiValue').textContent = aiVal;
+}
+function copyCT() {
+  let val = document.getElementById('ctValue').textContent;
+  if (val === '-') { showNotif('CT belum ada'); return; }
+  navigator.clipboard.writeText(val).then(()=>showNotif('CT disalin: ' + val)).catch(()=>fallbackCopy(val));
+}
+function copyAI() {
+  let val = document.getElementById('aiValue').textContent;
+  if (val === '-') { showNotif('AI belum ada'); return; }
+  navigator.clipboard.writeText(val).then(()=>showNotif('AI disalin: ' + val)).catch(()=>fallbackCopy(val));
+}
+
+function resetDataResult(){
+ if(!confirm('Reset Data Result ke default 28 baris?')) return;
+ document.getElementById('dataResult').value=defaultResult;
+ saveLS('dataResult_v6', defaultResult);
+ localStorage.removeItem('dataResult_v5');
+ document.getElementById('infoData').innerText='Direset';
+ showNotif('Data Result direset');
+ hitung();
+}
+function kosongkan(){
+ document.getElementById('dataResult').value='';
+ saveLS('dataResult_v6','');
+ document.getElementById('infoData').innerText='Dikosongkan';
+ showNotif('Dikosongkan');
+}
+function resetAllTotal(){
+ if(!confirm('Reset TOTAL semua (data, tabel, mistik, catatan, pasaran)?')) return;
+ localStorage.clear();
+ TABEL=JSON.parse(JSON.stringify(DEFAULT_TABEL));
+ MISTIK_STR=JSON.parse(JSON.stringify(DEFAULT_MISTIK));
+ rebuild();
+ pasaranList=['HK','SGP','SYD']; curPas='HK';
+ document.getElementById('dataResult').value=defaultResult;
+ document.getElementById('formula').value='A8ml+C2+E1mb';
+ document.getElementById('formulaAS').value=''; document.getElementById('formulaCOP').value=''; document.getElementById('formulaKEP').value=''; document.getElementById('formulaEKOR').value='';
+ saveLS('tabel_data_v6', TABEL); saveLS('mistik_str_v6', MISTIK_STR); saveLS('pasaran_v6', pasaranList); saveLS('pasaran_cur_v6', curPas); saveLS('dataResult_v6', defaultResult);
+ renderPas(); renderTabelEditor(); renderMistikEditor(); renderCatatan();
+ showNotif('TOTAL direset');
+ hitung();
+}
+function copyHasil(){
+ let hasil=document.getElementById('hasil').innerText;
+ let rumus=document.getElementById('formula').value;
+ let multi=document.getElementById('multiMode').checked;
+ if(multi){
+   rumus='AS:'+document.getElementById('formulaAS').value+' COP:'+document.getElementById('formulaCOP').value+' KEP:'+document.getElementById('formulaKEP').value+' EKOR:'+document.getElementById('formulaEKOR').value+' MAIN:'+rumus;
+ }
+ let txt='PASARAN: '+curPas+'\nRUMUS: '+rumus+'\nHASIL: '+hasil+'\n'+document.getElementById('tabelResult').innerText+'\nDATA E1: '+(parseData()[0]||'');
+ if(navigator.clipboard){
+   navigator.clipboard.writeText(txt).then(function(){showNotif('Tersalin '+curPas);}).catch(function(){fallbackCopy(txt);});
+ } else {
+   fallbackCopy(txt);
+ }
+}
+function fallbackCopy(txt){
+ let ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); showNotif('Tersalin');
+}
+function showNotif(m){let n=document.getElementById('notif'); n.innerText='✔ '+m; n.style.display='block'; setTimeout(function(){n.style.display='none';},2200);}
+
+// load last
+let lastF=loadLS('last_formula_v6','A8ml+C2+E1mb'); document.getElementById('formula').value=lastF;
+let lastMulti=loadLS('last_formulas_multi_v6',{AS:'',COP:'',KEP:'',EKOR:''});
+document.getElementById('formulaAS').value=lastMulti.AS||''; document.getElementById('formulaCOP').value=lastMulti.COP||''; document.getElementById('formulaKEP').value=lastMulti.KEP||''; document.getElementById('formulaEKOR').value=lastMulti.EKOR||'';
+renderTabelEditor(); renderMistikEditor(); renderCatatan(); hitung();
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</html>
